@@ -1,3 +1,0 @@
-const express = require('express'); const app = express(); // Configuración del motor de vistas EJS app.set('view engine', 'ejs'); app.set('views', __dirname + '/views'); // Configura la carpeta donde estarán las vistas // Middleware para manejar JSON
-y formularios app.use(express.json()); app.use(express.urlencoded({ extended: true })); // Importar controladores const alumnoControllers = require('./controllers/alumnoControllers'); app.use('/', alumnoControllers); // Servir archivos estáticos (CSS,
-JS, imágenes, etc.) app.use(express.static(__dirname + '/public/')); app.listen(3000, function() { console.log('Servidor ejecutándose en el puerto 3000'); });

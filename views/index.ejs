@@ -16,6 +16,13 @@
             </div>
             <% } %>
                 <h1>Lista de Alumnos</h1>
+                <!-- Botones para añadir y modificar alumnos -->
+                <div class="mb-3">
+                    <a href="/alumnos/nuevo" class="btn btn-success">Añadir Alumno</a>
+                    <a href="/alumnos/modificar" class="btn btn-primary">Modificar Alumnos</a>
+                </div>
+                <!-- Tabla de alumnos sin opciones de modificación -->
+                <h2>Listado de Alumnos</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -24,16 +31,13 @@
                             <th>Apellido Paterno</th>
                             <th>Apellido Materno</th>
                             <th>ID de Grupo</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% alumnos.forEach(alumno => { %>
                             <tr>
                                 <td>
-                                    <a href="/alumnos/<%= alumno.NC %>">
-                                        <%= alumno.NC %>
-                                    </a>
+                                    <%= alumno.NC %>
                                 </td>
                                 <td>
                                     <%= alumno.Nombre %>
@@ -47,31 +51,11 @@
                                 <td>
                                     <%= alumno.IDGrupo %>
                                 </td>
-                                <td>
-                                    <a href="/alumnos/edit/<%= alumno._id %>" class="btn btn-warning">Editar</a>
-                                    <button onclick="eliminarAlumno('<%= alumno._id %>')" class="btn btn-danger">Eliminar</button>
-                                </td>
                             </tr>
                             <% }) %>
                     </tbody>
                 </table>
     </div>
-    <script>
-        function eliminarAlumno(id) {
-            if (confirm("¿Estás seguro de que deseas eliminar este alumno?")) {
-                fetch(`/alumnos/${id}`, {
-                        method: 'DELETE',
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            location.reload(); // Recarga la página para ver la lista actualizada
-                        } else {
-                            alert('Error al eliminar el alumno');
-                        }
-                    });
-            }
-        }
-    </script>
 </body>
 
 </html>
